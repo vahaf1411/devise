@@ -1,20 +1,35 @@
-
-    
-    <a class="navbar-brand" href="/">Devise</a>
-    <center>
-        <% if user_signed_in? %>
-        
-        <%= link_to 'SignOut' , destroy_user_session_path, method: :delete, class: 'nav-link' %>
-        
-        <% else %>
-        
-        <%= link_to 'Register' , new_user_registration_path, class: 'nav-link' %>
-          
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        
-        <%= link_to 'SignIn' , new_user_session_path, class: 'nav-link' %>
-          
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%= root_path %>">Instabook</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+      <%= link_to 'Home', root_path, class:'nav-link' %>
+       </li>
+       <li class="nav-item">
+       <%= link_to 'About', home_about_path, class:'nav-link' %>
+        </li>
+        <% if controller_name != "admin" %>
+      <% if user_signed_in? %>
+      <li class="nav-item">
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:'nav-link' %>
+       </li>
+      
        
+       <% else %>
+       <li class="nav-item">
+       <%= link_to 'Register', new_user_registration_path, class:'nav-link' %>
+        </li>
+        <li class="nav-item">
+        <%= link_to 'Login', new_user_session_path, class:'nav-link' %>
+         </li>
+         
         <% end %>
-        
-     </center>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,4 +1,39 @@
+<style>
+hr{
+    height: 2px;
+    background-color: #ff0000;
+    border: none;
+}
+</style>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<% if current_user.present? %>
 
-<h1>Welcome to my page </h1>
+<h1> Welcome, <%= current_user.firstname %>&nbsp;<%= current_user.lastname %> </h1><br/>
+<%= link_to "Edit profile" , edit_user_registration_path %><br/><br/>
+<%if current_user.avatar.persisted? %><%= image_tag current_user.avatar,width:'80px' %><% end %><br/>
+<br/>
+<%= link_to "Create Posts" , posts_path %> 
 
+<% else %>
+<h1> Welcome to Instabook </h1><br/>
 
+<% @users.each do |user|%>
+    <div class="text-center">
+    <p><%= image_tag user.avatar, width:'30px' %> &nbsp;User Name: <%= user.firstname %> <%= user.lastname %></p>
+    
+    <% @posts.each do |post| %>
+        <% if user.id==post.user.id %>
+        <% post.images.each do |image| %>    
+                    
+            <%= image_tag image, width:'200px' %>
+            <% end %>
+        <p>Title:<%= post.title %></p>
+        <p>Body:<%= post.body %></p>
+        <hr>
+         <%end %>
+        <% end %>
+        
+        <%end %>
+        
+        </div>
+<% end %>
